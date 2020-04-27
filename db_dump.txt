@@ -1,0 +1,104 @@
+-- phpMyAdmin SQL Dump
+-- version 5.0.2
+-- https://www.phpmyadmin.net/
+--
+-- Host: localhost:3307
+-- Generation Time: Apr 27, 2020 at 08:52 PM
+-- Server version: 10.4.11-MariaDB
+-- PHP Version: 7.4.4
+
+SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
+START TRANSACTION;
+SET time_zone = "+00:00";
+
+--
+-- Database: `fuet`
+--
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `product`
+--
+
+CREATE TABLE `product` (
+  `productID` int(11) NOT NULL,
+  `name` varchar(200) NOT NULL,
+  `cost` int(11) NOT NULL,
+  `imageURL` varchar(200) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+
+--
+-- Dumping data for table `product`
+--
+
+INSERT INTO `product` (`productID`, `name`, `cost`, `imageURL`) VALUES
+(1, 'White T-Shirt', 50, 'https://www.jackjones.com/dw/image/v2/ABBT_PRD/on/demandware.static/-/Sites-pim-catalog/default/dwf950b1d3/pim-static/large/12058529_OPTICALWHITE_001_ProductLarge.jpg?sw=1280'),
+(2, 'Red T-Shirt', 50, 'https://www.marni.com/12/12386489MT_13_n_r.jpg'),
+(3, 'Jeans', 80, 'https://static.pullandbear.net/2/photos/2020/V/0/1/p/9682/407/407/9682407407_1_1_3.jpg?t=1576253213470'),
+(4, 'Socks', 20, 'https://www.mediashop.tv/daten/product_image/ed5d_01_2M2M_Neurosocks_1140x964_20200130_KS-470x397.jpg');
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `shoppinglist`
+--
+
+CREATE TABLE `shoppinglist` (
+  `shoppingListID` int(11) NOT NULL,
+  `productIDFK` int(11) NOT NULL,
+  `amount` int(11) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+
+--
+-- Dumping data for table `shoppinglist`
+--
+
+INSERT INTO `shoppinglist` (`shoppingListID`, `productIDFK`, `amount`) VALUES
+(1, 3, 1),
+(2, 4, 2),
+(3, 2, 1);
+
+--
+-- Indexes for dumped tables
+--
+
+--
+-- Indexes for table `product`
+--
+ALTER TABLE `product`
+  ADD PRIMARY KEY (`productID`);
+
+--
+-- Indexes for table `shoppinglist`
+--
+ALTER TABLE `shoppinglist`
+  ADD PRIMARY KEY (`shoppingListID`),
+  ADD KEY `productIDFK` (`productIDFK`);
+
+--
+-- AUTO_INCREMENT for dumped tables
+--
+
+--
+-- AUTO_INCREMENT for table `product`
+--
+ALTER TABLE `product`
+  MODIFY `productID` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=9;
+
+--
+-- AUTO_INCREMENT for table `shoppinglist`
+--
+ALTER TABLE `shoppinglist`
+  MODIFY `shoppingListID` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
+
+--
+-- Constraints for dumped tables
+--
+
+--
+-- Constraints for table `shoppinglist`
+--
+ALTER TABLE `shoppinglist`
+  ADD CONSTRAINT `shoppinglist_ibfk_1` FOREIGN KEY (`productIDFK`) REFERENCES `product` (`productID`);
+COMMIT;
