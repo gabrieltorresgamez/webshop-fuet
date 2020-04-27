@@ -1,0 +1,19 @@
+.example-icon {
+  padding: 0 14px;
+}
+
+.nav-link {
+  text-decoration: none;
+  color: white;
+}
+
+.example-spacer {
+  flex: 1 1 auto;
+}
+
+.footer {
+  color: grey;
+  position: absolute;
+  left: 46%;
+  bottom: 1%;
+}

@@ -1,0 +1,68 @@
+<h1 style="text-align: center;">It's not a joint, just a Salami</h1>
+<h3 style="text-align: center;">Your shopping cart:</h3>
+<mat-grid-list cols="12" rowHeight="0.2:2">
+  <mat-grid-tile [colspan]="2"></mat-grid-tile>
+  <mat-grid-tile [colspan]="8">
+    <div style="width: 100%; height: 100%;">
+      <mat-grid-list cols="12">
+        <mat-grid-tile [colspan]="3">
+          <p>Product</p>
+        </mat-grid-tile>
+        <mat-grid-tile [colspan]="3">
+          <p>Amount</p>
+        </mat-grid-tile>
+        <mat-grid-tile [colspan]="3">
+          <p>Price</p>
+        </mat-grid-tile>
+        <mat-grid-tile [colspan]="3">
+          <p>Remove</p>
+        </mat-grid-tile>
+      </mat-grid-list>
+      <mat-grid-list *ngFor="let shoppingItem of shoppingList" cols="12">
+        <mat-grid-tile [colspan]="3">
+          <img
+            style="width: 30%;"
+            src="{{ products[shoppingItem.productIDFK - 1].imageURL }}"
+          />
+          <p>{{ products[shoppingItem.productIDFK - 1].name }}</p>
+        </mat-grid-tile>
+        <mat-grid-tile [colspan]="3">
+          <mat-form-field style="width: 30%;">
+            <mat-label>Amount</mat-label>
+            <input
+              matInput
+              placeholder="Ex. 2"
+              [(ngModel)]="shoppingItem.amount"
+              type="number"
+            />
+          </mat-form-field>
+          <button
+            mat-raised-button
+            width="70%;"
+            (click)="updateShoppingItem(shoppingItem)"
+            color="primary"
+          >
+            Update
+          </button>
+        </mat-grid-tile>
+        <mat-grid-tile [colspan]="3">
+          <p>
+            {{
+              shoppingItem.amount * products[shoppingItem.productIDFK - 1].cost
+            }}CHF
+          </p>
+        </mat-grid-tile>
+        <mat-grid-tile [colspan]="3">
+          <button
+            mat-raised-button
+            width="10%;"
+            (click)="removeShoppingItem(shoppingItem)"
+            style="background-color: red;"
+          >
+            X
+          </button>
+        </mat-grid-tile>
+      </mat-grid-list>
+    </div>
+  </mat-grid-tile>
+</mat-grid-list>
